@@ -11,7 +11,7 @@ ARG GITHUB_TOKEN
 RUN git config --global url.https://$GITHUB_TOKEN@github.com/.insteadOf https://github.com/
 
 RUN go mod tidy
-RUN go build GOOS=linux CGO_ENABLED=0 -tags netgo -a -v -installsuffix cgo -o bin/shortie main.go
+RUN go build -tags netgo -a -v -installsuffix cgo -o bin/shortie main.go
 
 
 FROM alpine:3

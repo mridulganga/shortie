@@ -10,8 +10,7 @@ ARG GITHUB_TOKEN
 
 RUN git config --global url.https://$GITHUB_TOKEN@github.com/.insteadOf https://github.com/
 
-RUN make vendor
-RUN make build
+RUN go mod tidy
 RUN go build GOOS=linux CGO_ENABLED=0 -tags netgo -a -v -installsuffix cgo -o bin/shortie main.go
 
 

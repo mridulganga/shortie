@@ -1,5 +1,5 @@
 # shortie
-https://github.com/mridulganga/shortie/actions/workflows/docker-image.yml/badge.svg
+![example workflow](https://github.com/mridulganga/shortie/actions/workflows/docker-image.yml/badge.svg)
 short url shortner
 
 ### About

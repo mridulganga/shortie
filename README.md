@@ -1,6 +1,6 @@
-# shortie
+# shortie (short url shortner)
 ![example workflow](https://github.com/mridulganga/shortie/actions/workflows/docker-image.yml/badge.svg)
-short url shortner
+
 
 ### About
 This is a small URL shortner (60 lines of code). It uses leveldb and fiber(based on fasthttp). Why you say? I just wanted to try them out.

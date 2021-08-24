@@ -8,11 +8,14 @@ import (
 	"github.com/syndtr/goleveldb/leveldb"
 )
 
-func ListRedirects(db *leveldb.DB) map[string]string {
-	collection := map[string]string{}
+func ListRedirects(db *leveldb.DB) []map[string]string {
+	collection := []map[string]string{}
 	iter := db.NewIterator(nil, nil)
 	for iter.Next() {
-		collection[string(iter.Key())] = string(iter.Value())
+		collection = append(collection, map[string]string{
+			"code": string(iter.Key()),
+			"url":  string(iter.Value()),
+		})
 	}
 	iter.Release()
 	err := iter.Error()
@@ -24,6 +27,9 @@ func ListRedirects(db *leveldb.DB) map[string]string {
 
 func main() {
 	app := fiber.New()
+
+	app.Static("/ui", "./ui/public")
+
 	db, err := leveldb.OpenFile("urls.db", nil)
 	if err != nil {
 		panic(err)

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.9.3/css/bulma.min.css">
+</head>
+
+<body>
+
+    <table>
+        <thead>
+            <th>Code</th>
+            <th>URL</th>
+        </thead>
+        <tbody id="list">
+            
+        </tbody>
+    </table>
+
+    <input type="text" id="code" placeholder="code">
+    <input type="text" id="url" placeholder="value">
+    <button id="add">Add URL</button>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/umbrella/0.0.0/umbrella.min.js"></script>
+    <script>
+
+        setInterval(function(){
+            
+        }, 2000)
+
+        u("#add").on('click', function () {
+            console.log(u("#code"))
+            axios.post('/', {
+                "code": u("#code").nodes[0].value,
+                "url": u("#url").nodes[0].value
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -21,6 +21,7 @@ RUN apk update \
     && update-ca-certificates 2>/dev/null || true
 
 COPY --from=builder /app/bin/shortie /shortie
+COPY ./ui /ui
 
 CMD ["/shortie"]
 

@@ -16,14 +16,14 @@ go run main.go
 
 ### To add an entry
 ```
-curl -X POST 'https://shortie.junglesucks.com/' \
+curl -X POST 'https://shortie.mridulganga.dev/' \
 -H 'Content-Type: application/json' \
 -d '{
     "code": "mg",
     "url": "https://mridulganga.dev"
 }'
 ```
-now to access this you can goto https://shortie.junglesucks.com/mg
+now to access this you can goto https://shortie.mridulganga.dev/mg
 
 ### To list the entries
 ```

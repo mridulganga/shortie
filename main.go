@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+	"fmt"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/sirupsen/logrus"
@@ -40,6 +41,10 @@ func main() {
 			return c.JSON(ListRedirects(db))
 		}
 		return c.SendString("Hello World!")
+	})
+
+	app.Get("/domain", func(c *fiber.Ctx) error {
+		return c.SendString(fmt.Sprintf("%s/", string(c.Context().URI().Host())))
 	})
 
 	app.Get("/:code", func(c *fiber.Ctx) error {

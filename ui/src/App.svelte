@@ -16,15 +16,18 @@
 		})
 	}
 	
-	setInterval(async function(){
+	async function getUrls(){
 			const res = await fetch("/?list=true");
 			let urls = await res.json();
 			console.log(urls)
 			listofurls = urls
-	}, 2000)
+	}
+	getUrls()
+
+	setInterval(getUrls, 2000)
 </script>
 
-<h2>Shortie</h2>
+<h2>Shorty</h2>
 
 <input type="text" placeholder="code" bind:value={code}>
 <input type="text" placeholder="url" bind:value={url}>

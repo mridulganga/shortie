@@ -40,13 +40,15 @@
 	}
 
 	function copyURL(code) {
-		document.getElementById("icon-"+code).classList.replace('icon-copy','icon-check')
-		document.getElementById(code).classList.replace('is-link','is-primary')
+		document
+			.getElementById("icon-" + code)
+			.classList.replace("far", "fas");
 		navigator.clipboard.writeText("https://" + href + code);
 		setTimeout(function () {
-			document.getElementById("icon-"+code).classList.replace('icon-check','icon-copy')
-			document.getElementById(code).classList.replace('is-primary','is-link')
-		}, 1000)
+			document
+				.getElementById("icon-" + code)
+				.classList.replace("fas", "far");
+		}, 1000);
 	}
 
 	async function getUrls() {
@@ -96,7 +98,7 @@
 	<div class="column is-3" />
 	<div class="column">
 		<!-- PAGE TITLE -->
-		<section class="hero is-link">
+		<section class="hero is-info" style="background: #22a6b3;">
 			<div class="hero-body">
 				<div class="container has-text-centered">
 					<p class="title">Shortie - The URL Shortener</p>
@@ -105,12 +107,52 @@
 					</p>
 				</div>
 			</div>
-		</section>
+			<div class="hero-foot">
+				<div class="container">
+					<div class="field has-addons p-3">
+						<p class="control">
+							<a class="button is-static is-primary is-light">
+							  {href}
+							</a>
+						  </p>
+						<!-- <div class="field-body"> -->
+							<!-- <div class="field"> -->
+								<p class="control">
+									<input
+										class="input is-primary"
+										type="text"
+										placeholder="Short URL"
+										bind:value={code}
+									/>
+								</p>
+							<!-- </div> -->
+							<!-- <div class="field"> -->
+								<p class="control">
+									<input
+										class="input is-primary"
+										type="text"
+										placeholder="Full URL"
+										bind:value={url}
+									/>
+								</p>
+							<!-- </div> -->
+						<!-- </div> -->
+						<!-- <div class="field pl-2"> -->
+							<p class="control">
+								<button class="button is-primary is-light" on:click={addURL} style="background: #7ed6df;">
+									Shortie!
+								</button>
+							</p>
+						<!-- </div> -->
+					</div>
+				</div>
+			</div>
+		</section><br>
 
 		<!-- GENERATION FORM -->
 		<!-- <div class="container is-fluid has-text-centered pt-5"> -->
-		<div class="box">
-			<!-- <h3 class='title is-4'>Generate your own Shortie URL</h3> -->
+		<!-- <div class="box">
+			<h3 class='title is-4'>Generate your own Shortie URL</h3>
 			<div class="container pt-5">
 				<div class="field is-horizontal">
 					<div class="field-label is-normal">
@@ -149,49 +191,44 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div> -->
 		<!-- </div> -->
 		{#each listofurls as item}
 			<div class="box">
-				<div class="card-content">
+				<!-- <div class="card-content"> -->
 					<div class="columns">
-						<div class="column is-10">
+						<div class="column is-9">
 							<p class="is-size-4">
 								<a href={"https://" + href + item.code}
-									>{href}{item.code}</a
-								>
+									>{href}{item.code}</a>
 							</p>
 							<p class="is-size-6">
 								{item.url}
 							</p>
 						</div>
-						<div class="column is-2">
-							<div class="columns is-mobile has-text-centered">
-								<div class="column is-6 p-4">
-									<div class='tooltip'>
-										<button
-											class="button is-link is-inverted"
-											id = {item.code}
-											on:click|stopPropagation={copyURL(item.code)}
-											><i
-												class="icon-copy icon-2x"
-												id={"icon-"+item.code}
-											/></button
-										>
-									</div>
-								</div>
-								<div class="column is-6 p-4">
+						<div class="column is-3">
+							<div class="field has-addons has-text-centered">
+								<div class="control">
 									<button
-										class="button is-danger is-inverted"
+										class="button is-primary is-inverted is-medium"
 										id={item.code}
-										on:click={deleteURL(item.code)}
-										><i class="icon-trash icon-2x" /></button
-									>
+										on:click={copyURL(
+											item.code
+										)}>
+										<i class="far fa-copy" id={"icon-" + item.code}></i>
+										</button>
+								</div>
+								<div class="control">
+									<button
+										class="button is-danger is-inverted is-medium"
+										id={item.code}
+										on:click|stopPropagation={deleteURL(item.code)}>
+										<i class="far fa-trash-alt"></i></button>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				<!-- </div> -->
 			</div>
 		{/each}
 	</div>

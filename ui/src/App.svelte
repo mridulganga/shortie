@@ -67,31 +67,6 @@
 	setInterval(getUrls, 2000);
 </script>
 
-<!-- URL LIST -->
-<!-- <div class="container has-text-centered pt-5">
-	<h3 class="title is-4">List of Generated URLs</h3>
-</div> -->
-<!-- <div class="table-container is-fluid pt-5 has-text-centered">
-	{#if listofurls.length > 0}
-		<table class="table is-striped is-fullwidth is-responsive">
-			<thead>
-				<th>Shortie URL</th>
-				<th>Full URL</th>
-			</thead>
-			<tbody>
-				{#each listofurls as item}
-					<tr>
-						<td><a href="{href+item.code}">{href}{item.code}</a></td>
-						<td><a href="{item.url}">{item.url}</a></td>
-					</tr>
-				{/each}
-			</tbody>
-		</table>
-	{:else}
-		<h3 class="title is-5">No URLs to display</h3>
-	{/if} -->
-<!-- </div> -->
-<!-- <div class="container"> -->
 <div class="columns">
 	<div class="column is-3" />
 	<div class="column">
@@ -113,8 +88,6 @@
 								{href}
 							</a>
 						</p>
-						<!-- <div class="field-body"> -->
-						<!-- <div class="field"> -->
 						<p class="control">
 							<input
 								class="input is-primary"
@@ -125,8 +98,6 @@
 						</p>
 					</div>
 					<div class="field has-addons p-3">
-						<!-- </div> -->
-						<!-- <div class="field"> -->
 						<p class="control">
 							<input
 								class="input is-primary"
@@ -135,9 +106,6 @@
 								bind:value={url}
 							/>
 						</p>
-						<!-- </div> -->
-						<!-- </div> -->
-						<!-- <div class="field pl-2"> -->
 						<p class="control">
 							<button
 								class="button is-primary is-light"
@@ -147,57 +115,11 @@
 								Shortie!
 							</button>
 						</p>
-						<!-- </div> -->
 					</div>
 				</div>
 			</div>
 		</section>
 		<br />
-
-		<!-- GENERATION FORM -->
-		<!-- <div class="container is-fluid has-text-centered pt-5"> -->
-		<!-- <div class="box">
-			<h3 class='title is-4'>Generate your own Shortie URL</h3>
-			<div class="container pt-5">
-				<div class="field is-horizontal">
-					<div class="field-label is-normal">
-						<label class="label" style="text-align: left;"
-							>{href}</label
-						>
-					</div>
-					<div class="field-body">
-						<div class="field">
-							<p class="control is-expanded">
-								<input
-									class="input"
-									type="text"
-									placeholder="Short URL"
-									bind:value={code}
-								/>
-							</p>
-						</div>
-						<div class="field">
-							<p class="control is-expanded">
-								<input
-									class="input"
-									type="text"
-									placeholder="Full URL"
-									bind:value={url}
-								/>
-							</p>
-						</div>
-					</div>
-					<div class="field pl-2">
-						<div class="control">
-							<button class="button is-link" on:click={addURL}>
-								Shortie!
-							</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div> -->
-		<!-- </div> -->
 		{#each listofurls as item}
 			<div class="box">
 				<!-- <div class="card-content"> -->
@@ -246,22 +168,3 @@
 	</div>
 	<div class="column is-3" />
 </div>
-<!-- </div> -->
-
-<!-- GENERATION FORM -->
-<!-- <div class="container is-fluid has-text-centered pt-5 is-link">
-	<div class="notification is-link">
-		<div class="columns">
-			<div class="column is-2"><h3 class='title'>Shorty</h3></div>
-			<div class="column is-1">{href}</div>
-			<div class="column is-2">
-				<input
-					class="input"
-					type="text"
-					placeholder="Short URL"
-					bind:value={code}
-				/>
-			</div>
-		</div>
-	</div>
-</div> -->

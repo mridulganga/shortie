@@ -2,12 +2,14 @@ package main
 
 import (
 	"errors"
-	"fmt"
+	"os"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/sirupsen/logrus"
 	"github.com/syndtr/goleveldb/leveldb"
 )
+
+const defaultHost = "shortie.mridulganga.dev"
 
 func ListRedirects(db *leveldb.DB) []map[string]string {
 	collection := []map[string]string{}
@@ -44,7 +46,12 @@ func main() {
 	})
 
 	app.Get("/domain", func(c *fiber.Ctx) error {
-		return c.SendString(fmt.Sprintf("%s/", string(c.Context().URI().Host())))
+		host := os.Getenv("HOST")
+		if host == "" {
+			host = defaultHost
+		}
+		host += "/"
+		return c.SendString(host)
 	})
 
 	app.Get("/:code", func(c *fiber.Ctx) error {

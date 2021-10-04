@@ -27,6 +27,28 @@
 		});
 	}
 
+	async function deleteURL(code) {
+		const res = await fetch("/", {
+			method: "DELETE",
+			body: JSON.stringify({
+				code: code,
+			}),
+			headers: {
+				"content-type": "application/json",
+			},
+		});
+	}
+
+	function copyURL(code) {
+		document.getElementById("icon-"+code).classList.replace('icon-copy','icon-check')
+		document.getElementById(code).classList.replace('is-link','is-primary')
+		navigator.clipboard.writeText("https://" + href + code);
+		setTimeout(function () {
+			document.getElementById("icon-"+code).classList.replace('icon-check','icon-copy')
+			document.getElementById(code).classList.replace('is-primary','is-link')
+		}, 1000)
+	}
+
 	async function getUrls() {
 		const res = await fetch("/?list=true");
 		let urls = await res.json();
@@ -70,83 +92,111 @@
 	{/if} -->
 <!-- </div> -->
 <!-- <div class="container"> -->
-	<div class="columns">
-		<div class="column is-3" />
-		<div class="column">
-			<!-- PAGE TITLE -->
-			<section class="hero is-link">
-				<div class="hero-body">
-					<div class="container has-text-centered">
-						<p class="title">Shortie - The URL Shortener</p>
-						<p class="subtitle">
-							{tagline}
-						</p>
+<div class="columns">
+	<div class="column is-3" />
+	<div class="column">
+		<!-- PAGE TITLE -->
+		<section class="hero is-link">
+			<div class="hero-body">
+				<div class="container has-text-centered">
+					<p class="title">Shortie - The URL Shortener</p>
+					<p class="subtitle">
+						{tagline}
+					</p>
+				</div>
+			</div>
+		</section>
+
+		<!-- GENERATION FORM -->
+		<!-- <div class="container is-fluid has-text-centered pt-5"> -->
+		<div class="box">
+			<!-- <h3 class='title is-4'>Generate your own Shortie URL</h3> -->
+			<div class="container pt-5">
+				<div class="field is-horizontal">
+					<div class="field-label is-normal">
+						<label class="label" style="text-align: left;"
+							>{href}</label
+						>
+					</div>
+					<div class="field-body">
+						<div class="field">
+							<p class="control is-expanded">
+								<input
+									class="input"
+									type="text"
+									placeholder="Short URL"
+									bind:value={code}
+								/>
+							</p>
+						</div>
+						<div class="field">
+							<p class="control is-expanded">
+								<input
+									class="input"
+									type="text"
+									placeholder="Full URL"
+									bind:value={url}
+								/>
+							</p>
+						</div>
+					</div>
+					<div class="field pl-2">
+						<div class="control">
+							<button class="button is-link" on:click={addURL}>
+								Shortie!
+							</button>
+						</div>
 					</div>
 				</div>
-			</section>
-
-			<!-- GENERATION FORM -->
-			<!-- <div class="container is-fluid has-text-centered pt-5"> -->
-				<div class="box">
-					<!-- <h3 class='title is-4'>Generate your own Shortie URL</h3> -->
-					<div class="container pt-5">
-						<div class="field is-horizontal">
-							<div class="field-label is-normal">
-								<label class="label" style="text-align: left;"
-									>{href}</label
+			</div>
+		</div>
+		<!-- </div> -->
+		{#each listofurls as item}
+			<div class="box">
+				<div class="card-content">
+					<div class="columns">
+						<div class="column is-10">
+							<p class="is-size-4">
+								<a href={"https://" + href + item.code}
+									>{href}{item.code}</a
 								>
-							</div>
-							<div class="field-body">
-								<div class="field">
-									<p class="control is-expanded">
-										<input
-											class="input"
-											type="text"
-											placeholder="Short URL"
-											bind:value={code}
-										/>
-									</p>
+							</p>
+							<p class="is-size-6">
+								{item.url}
+							</p>
+						</div>
+						<div class="column is-2">
+							<div class="columns is-mobile has-text-centered">
+								<div class="column is-6 p-4">
+									<div class='tooltip'>
+										<button
+											class="button is-link is-inverted"
+											id = {item.code}
+											on:click|stopPropagation={copyURL(item.code)}
+											><i
+												class="icon-copy icon-2x"
+												id={"icon-"+item.code}
+											/></button
+										>
+									</div>
 								</div>
-								<div class="field">
-									<p class="control is-expanded">
-										<input
-											class="input"
-											type="text"
-											placeholder="Full URL"
-											bind:value={url}
-										/>
-									</p>
-								</div>
-							</div>
-							<div class="field pl-2">
-								<div class="control">
+								<div class="column is-6 p-4">
 									<button
-										class="button is-link"
-										on:click={addURL}
+										class="button is-danger is-inverted"
+										id={item.code}
+										on:click={deleteURL(item.code)}
+										><i class="icon-trash icon-2x" /></button
 									>
-										Shortie!
-									</button>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			<!-- </div> -->
-			{#each listofurls as item}
-				<div class="box">
-					<div class="card-content">
-						<p class="is-size-4">
-							<a href={"https://"+href + item.code}>{href}{item.code}</a>
-						</p>
-						<p class="is-size-6">
-							{item.url}
-						</p>
-					</div>
-				</div>
-			{/each}
-		</div>
-		<div class="column is-3" />
+			</div>
+		{/each}
 	</div>
+	<div class="column is-3" />
+</div>
 <!-- </div> -->
 
 <!-- GENERATION FORM -->

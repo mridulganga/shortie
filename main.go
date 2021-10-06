@@ -42,7 +42,7 @@ func main() {
 		if c.Query("list") == "true" {
 			return c.JSON(ListRedirects(db))
 		}
-		return c.SendString("Hello World!")
+		return c.Redirect("/ui")
 	})
 
 	app.Get("/domain", func(c *fiber.Ctx) error {

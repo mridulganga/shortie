@@ -74,5 +74,14 @@ func main() {
 		return errors.New("invalid code or url")
 	})
 
+	app.Delete("/", func(c *fiber.Ctx) error {
+		req := map[string]string{}
+		c.BodyParser(&req)
+		if err := db.Delete([]byte(req["code"]), nil); err != nil {
+			return err
+		}
+		return c.SendString("Deleted")
+	})
+
 	app.Listen(":8000")
 }
